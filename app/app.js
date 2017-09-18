@@ -22,6 +22,8 @@ function getModelCode(value, options) {
 
 // a list with cars register number to test { they are not correct }
 // https://codeshare.io/5zXDYE
+// algo to normalize
+// https://codeshare.io/axeDzN
 // https://tribe-back-end-dev.herokuapp.com/public/ofv/data/{carRegNumber}
 let carBrand = 'Toyota';
 let carYear = '2006';
