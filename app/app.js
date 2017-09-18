@@ -20,7 +20,8 @@ function getModelCode(value, options) {
   return result['code'].split(':')[0];
 }
 
-// a list with cars
+// a list with cars register number to test { they are not correct }
+// https://codeshare.io/5zXDYE
 // https://tribe-back-end-dev.herokuapp.com/public/ofv/data/{carRegNumber}
 let carBrand = 'Toyota';
 let carYear = '2006';
