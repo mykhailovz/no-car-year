@@ -14,13 +14,18 @@ function getCarCode(value, options) {
 function getModelCode(value, options) {
 
   let result = options.filter(item => {
-    return item.message = value;
+    return item.message === value;
   })[0];
 
   return result['code'].split(':')[0];
 }
 
-
+// a list with cars
+// https://tribe-back-end-dev.herokuapp.com/public/ofv/data/{carRegNumber}
+let carBrand = 'Toyota';
+let carYear = '2006';
+let carModel = 'RAV4';
+let carVariant = '2,2 D-4D 136hk DPF Executive';
 // from back-end response
 
 // global variables
@@ -53,6 +58,13 @@ function setCarModel(carModel, carModels, carYear) {
     carYear = carModel.slice(start+1, end).trim();
   }
 
+  console.log(`
+  ${config.carVariantUrl}
+  ?bilmerkeNr=${carCode}
+  &registreringsaar=${carYear}
+  &modellNr=${modelCode}
+  &modellaar=${carYear}`)
+
   return rp(`
     ${config.carVariantUrl}
     ?bilmerkeNr=${carCode}
@@ -66,18 +78,24 @@ function setCarVariant() {
 
 }
 
-setCarBrand('Audi')
+setCarBrand(carBrand)
   .then(() => {
-    return setCarYear(2000);
+    return setCarYear(carYear);
   })
   .then((res) => {
     let carModels = JSON.parse(res);
 
-    return setCarModel('A8 ( 2001 ) ', carModels, 2000);
+    return setCarModel(carModel, carModels, carYear);
   })
   .then((res) => {
-    console.log(res);
+    console.log(
+      JSON.parse(res)
+    );
   })
   .catch((err) => {
     console.log(err);
   })
+
+
+// https://www.finansportalen.no/insurance-calculator/rest/classifier/car/
+// carVariant?bilmerkeNr=5480&registreringsaar=2007&modellNr=18&modellaar=2007
